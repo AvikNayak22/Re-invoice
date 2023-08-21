@@ -1,5 +1,9 @@
-import React from "react";
-const Table = ({ list, total }) => {
+import React, { useContext } from "react";
+import { StateContext } from "../context/stateContext";
+
+export default function Table() {
+  const { list, total } = useContext(StateContext);
+
   return (
     <>
       <table width="100%" className="mb-10">
@@ -14,7 +18,7 @@ const Table = ({ list, total }) => {
         {list.map(({ id, description, quantity, price, amount }) => (
           <React.Fragment key={id}>
             <tbody>
-              <tr>
+              <tr className="h-10">
                 <td>{description}</td>
                 <td>{quantity}</td>
                 <td>{price}</td>
@@ -26,12 +30,10 @@ const Table = ({ list, total }) => {
       </table>
 
       <div>
-        <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold ">
-          ₹{total.toLocaleString()}
+        <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
+          ₹ {total.toLocaleString()}
         </h2>
       </div>
     </>
   );
-};
-
-export default Table;
+}

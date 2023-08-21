@@ -1,84 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useContext } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DeleteModal from "./DeleteModal";
+import { StateContext } from "../context/stateContext";
 
-export default function TableForm({
-  description,
-  setDescription,
-  quantity,
-  setQuantity,
-  price,
-  setPrice,
-  amount,
-  setAmount,
-  list,
-  setList,
-  total,
-  setTotal,
-}) {
-  const [isEditing, setIsEditing] = useState(false);
-
-  //Submit form function
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!description && !quantity && !price) {
-      alert("Please fill in all inputs");
-    } else {
-      const newItems = {
-        id: uuidv4(),
-        description,
-        quantity,
-        price,
-        amount,
-      };
-
-      setDescription("");
-      setQuantity("");
-      setPrice("");
-      setAmount("");
-      setList([...list, newItems]);
-      setIsEditing(false);
-    }
-  };
-
-  //Calculate items amount function
-  useEffect(() => {
-    const calculateAmount = (amount) => {
-      setAmount(quantity * price);
-    };
-
-    calculateAmount();
-  }, [amount, price, quantity, setAmount]);
-
-  //Calculate total amount of item in the table
-  useEffect(() => {
-    let rows = document.querySelectorAll(".amount");
-    let sum = 0;
-
-    for (const element of rows) {
-      if (element.className === "amount") {
-        sum += isNaN(element.innerHTML) ? 0 : parseInt(element.innerHTML);
-        setTotal(sum);
-      }
-    }
-  });
-
-  //Edit function
-  const editRow = (id) => {
-    const editingRow = list.find((row) => row.id === id);
-    setList(list.filter((row) => row.id !== id));
-    setIsEditing(true);
-    setDescription(editingRow.description);
-    setQuantity(editingRow.quantity);
-    setPrice(editingRow.price);
-  };
-
-  //Delete function
-  const deleteRow = (id) => setList(list.filter((row) => row.id !== id));
+export default function TableForm() {
+  const {
+    description,
+    setDescription,
+    quantity,
+    setQuantity,
+    price,
+    setPrice,
+    amount,
+    list,
+    total,
+    isEditing,
+    showModal,
+    setShowModal,
+    handleSubmit,
+    editRow,
+  } = useContext(StateContext);
 
   return (
     <>
+      <ToastContainer position="top-right" theme="colored" />
+
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col md:mt-16">
           <label htmlFor="description">Item description</label>
@@ -106,7 +54,7 @@ export default function TableForm({
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="price">Price(₹)</label>
+            <label htmlFor="price">Price</label>
             <input
               type="text"
               name="price"
@@ -118,27 +66,27 @@ export default function TableForm({
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="amount">Amount(₹)</label>
+            <label htmlFor="amount">Amount</label>
             <p>{amount}</p>
           </div>
         </div>
         <button
           type="submit"
-          className="mb-5 bg-blue-500 py-2 px-8 text-white font-bold rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
+          className="bg-blue-500 mb-5 text-white font-bold py-2 px-8 rounded hover:bg-blue-600 hover:text-white transition-all duration-150 hover:ring-4 hover:ring-blue-400"
         >
-          {isEditing ? "Editing row item" : "Add Table Item"}
+          {isEditing ? "Finish Editing" : "Add Table Item"}
         </button>
       </form>
 
       {/* Table items */}
 
-      <table width="100%" className="mb-10">
+      <table width="100%" className="mb-10 overflow-auto">
         <thead>
           <tr className="bg-gray-100 p-1">
             <td className="font-bold">Description</td>
             <td className="font-bold">Quantity</td>
-            <td className="font-bold">Price(₹)</td>
-            <td className="font-bold">Amount(₹)</td>
+            <td className="font-bold">Price</td>
+            <td className="font-bold">Amount</td>
             <td className="font-bold"></td>
             <td className="font-bold"></td>
           </tr>
@@ -146,30 +94,31 @@ export default function TableForm({
         {list.map(({ id, description, quantity, price, amount }) => (
           <React.Fragment key={id}>
             <tbody>
-              <tr>
+              <tr className="h-10">
                 <td>{description}</td>
                 <td>{quantity}</td>
                 <td>{price}</td>
                 <td className="amount">{amount}</td>
                 <td>
-                  <button onClick={() => deleteRow(id)}>
-                    <AiOutlineDelete className="text-red-500 font-bold text-xl" />
-                  </button>
-                </td>
-                <td>
                   <button onClick={() => editRow(id)}>
                     <AiOutlineEdit className="text-green-500 font-bold text-xl" />
                   </button>
                 </td>
+                <td>
+                  <button onClick={() => setShowModal(true)}>
+                    <AiOutlineDelete className="text-red-500 font-bold text-xl" />
+                  </button>
+                </td>
               </tr>
             </tbody>
+            {showModal && <DeleteModal id={id} />}
           </React.Fragment>
         ))}
       </table>
 
       <div>
         <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
-          ₹{total.toLocaleString()}
+          ₹ {total.toLocaleString()}
         </h2>
       </div>
     </>
