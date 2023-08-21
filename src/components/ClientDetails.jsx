@@ -1,4 +1,9 @@
-const ClientDetails = ({ clientName, clientAddress }) => {
+import { useContext } from "react";
+import { StateContext } from "../context/stateContext";
+
+export default function ClientDetails() {
+  const { clientName, clientAddress } = useContext(StateContext);
+
   return (
     <>
       <section className="mt-10">
@@ -7,6 +12,4 @@ const ClientDetails = ({ clientName, clientAddress }) => {
       </section>
     </>
   );
-};
-
-export default ClientDetails;
+}

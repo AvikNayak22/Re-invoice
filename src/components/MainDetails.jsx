@@ -1,12 +1,15 @@
-const MainDetails = ({ name, address }) => {
+import { useContext } from "react";
+import { StateContext } from "../context/stateContext";
+
+export default function MainDetails() {
+  const { name, address } = useContext(StateContext);
+
   return (
     <>
-      <section className="flex  flex-col items-end justify-end ">
-        <h2 className="font-bold text-xl uppercase mb-1 md:text-4xl">{name}</h2>
+      <section className="flex flex-col items-end justify-end">
+        <h2 className="font-bold text-3xl uppercase mb-1">{name}</h2>
         <p>{address}</p>
       </section>
     </>
   );
-};
-
-export default MainDetails;
+}
