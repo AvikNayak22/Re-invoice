@@ -1,6 +1,6 @@
 # React-Invoice
 
-The Invoice Generator is a hassle-free web tool for creating and customizing invoices. It offers the ability to manage invoice details, item lists, and easily print or download invoices as PDFs, making the invoicing process straightforward and efficient.
+React Invoice is a hassle-free web tool for creating and customizing invoices. It offers the ability to manage invoice details, item lists, and easily print or download invoices as PDFs, making the invoicing process straightforward and efficient.
 
 ## Table of Contents
 - [Screenshot](#screenshot)
