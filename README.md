@@ -3,12 +3,19 @@
 The Invoice Generator is a hassle-free web tool for creating and customizing invoices. It offers the ability to manage invoice details, item lists, and easily print or download invoices as PDFs, making the invoicing process straightforward and efficient.
 
 ## Table of Contents
-
+- [Screenshot](#screenshot)
 - [Demo](#demo)
 - [Features](#features)
+- [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Author](#author)
+
+## Screenshot
+
+
+![Screenshot 2023-10-25 123624](https://github.com/AvikNayak22/React-Invoice/assets/110925067/d26ff841-0aa2-436c-8fd6-aac187152b2e)
 
 ## Demo
 
@@ -20,8 +27,15 @@ See the Invoice Generator in action: [Demo Link](https://an-invoice-app.netlify.
 - Print invoices directly from your browser using the react-to-print library.
 - Responsive design for various devices and screen sizes.
 - Easily add, remove, and edit invoice items.
-- Calculate and display totals, including subtotals, taxes, and the final invoice amount.
+- Calculate and display totals, including subtotals and the final invoice amount.
 - Download invoices as PDF files for easy sharing and storage.
+
+## Technologies Used
+- React.js
+- Tailwind CSS
+- react-to-print library
+- Node.js (for the development environment)
+- npm (Node Package Manager)
 
 ## Getting Started
 
@@ -40,4 +54,7 @@ Before you begin, ensure you have the following installed:
 3. Install the required dependencies: `npm install`
 4. Start the development server: `npm run dev`
 5. Access the Invoice Generator in your web browser by navigating to `http://localhost:5173`
+
+## Author
+- __Github__ : AvikNayak22
 
