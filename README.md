@@ -39,7 +39,7 @@ See the Invoice Generator in action: [Demo Link](https://an-invoice-app.netlify.
 
 ## Getting Started
 
-Follow these instructions to set up and run the Invoice Generator on your local machine.
+Follow these instructions to set up and run the project on your local machine.
 
 ### Prerequisites
 
@@ -49,11 +49,26 @@ Before you begin, ensure you have the following installed:
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/AvikNayak22/React-Invoice.git`
-2. Navigate to the project directory: `cd React-Invoice`
-3. Install the required dependencies: `npm install`
-4. Start the development server: `npm run dev`
-5. Access the Invoice Generator in your web browser by navigating to `http://localhost:5173`
+1. Clone the repository:
+```
+ git clone https://github.com/AvikNayak22/React-Invoice.git`
+```
+2. Navigate to the project directory:
+```
+cd React-Invoice
+```
+3. Install the required dependencies:
+```
+npm install
+```
+4. Start the development server:
+```
+npm run dev
+```
+5. Access the invoice generator in your web browser:
+```
+http://localhost:5173
+```
 
 ## Author
 - __Github__ : AvikNayak22
