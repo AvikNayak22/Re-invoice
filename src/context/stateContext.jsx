@@ -1,5 +1,12 @@
 // Importing necessary dependencies and modules from external libraries
-import React, { createContext, useEffect, useRef, useState, useMemo, useCallback } from "react";
+import {
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import collect from "collect.js";
@@ -9,34 +16,89 @@ const StateContext = createContext();
 
 // Defining a provider component that will wrap the application and provide state to its children
 const StateProvider = ({ children }) => {
-  
   // State variables to manage various form and invoice-related data
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [bankAccount, setBankAccount] = useState("");
-  const [website, setWebsite] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [clientAddress, setClientAddress] = useState("");
-  const [invoiceNumber, setInvoiceNumber] = useState("");
-  const [invoiceDate, setInvoiceDate] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [notes, setNotes] = useState("");
+  const [name, setName] = useState(localStorage.getItem("name") || "");
+  const [address, setAddress] = useState(localStorage.getItem("address") || "");
+  const [email, setEmail] = useState(localStorage.getItem("email") || "");
+  const [phone, setPhone] = useState(localStorage.getItem("phone") || "");
+  const [bankName, setBankName] = useState(
+    localStorage.getItem("bankName") || ""
+  );
+  const [bankAccount, setBankAccount] = useState(
+    localStorage.getItem("bankAccount") || ""
+  );
+  const [website, setWebsite] = useState(localStorage.getItem("website") || "");
+  const [clientName, setClientName] = useState(
+    localStorage.getItem("clientName") || ""
+  );
+  const [clientAddress, setClientAddress] = useState(
+    localStorage.getItem("clientAddress") || ""
+  );
+  const [invoiceNumber, setInvoiceNumber] = useState(
+    localStorage.getItem("invoiceNumber") || ""
+  );
+  const [invoiceDate, setInvoiceDate] = useState(
+    localStorage.getItem("invoiceDate") || ""
+  );
+  const [dueDate, setDueDate] = useState(localStorage.getItem("dueDate") || "");
+  const [notes, setNotes] = useState(localStorage.getItem("notes") || "");
+
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(
+    JSON.parse(localStorage.getItem("list")) || []
+  );
+
   const [total, setTotal] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const saveToLocalStorage = (data) => {
+    Object.entries(data).forEach(([key, value]) => {
+      localStorage.setItem(key, value);
+    });
+  };
+
+  useEffect(() => {
+    const data = {
+      name,
+      address,
+      email,
+      phone,
+      bankName,
+      bankAccount,
+      website,
+      clientName,
+      clientAddress,
+      invoiceNumber,
+      invoiceDate,
+      dueDate,
+      notes,
+    };
+
+    saveToLocalStorage(data);
+  }, [
+    name,
+    address,
+    email,
+    phone,
+    bankName,
+    bankAccount,
+    website,
+    clientName,
+    clientAddress,
+    invoiceNumber,
+    invoiceDate,
+    dueDate,
+    notes,
+  ]);
+
   // Ref for referencing a component in the DOM
   const componentRef = useRef();
 
-   // Function to handle printing
+  // Function to handle printing
   const handlePrint = useCallback(() => {
     window.print();
   }, []);
@@ -66,7 +128,6 @@ const StateProvider = ({ children }) => {
         setAmount("");
         setList([...list, newItems]);
         setIsEditing(false);
-        //console.log(list);
       }
     },
     [amount, description, list, price, quantity]
@@ -88,6 +149,7 @@ const StateProvider = ({ children }) => {
 
   useEffect(() => {
     calculateTotal();
+    localStorage.setItem("list", JSON.stringify(list));
   });
 
   // Function to edit a row in the table
@@ -103,12 +165,14 @@ const StateProvider = ({ children }) => {
     [list]
   );
 
- // Function to delete a row in the table
+  // Function to delete a row in the table
   const deleteRow = useCallback(
     (id) => {
       setList(list.filter((row) => row.id !== id));
       setShowModal(false);
-    },[list]);
+    },
+    [list]
+  );
 
   // Creating a context object with all the state variables and functions
   const context = useMemo(
@@ -220,3 +284,4 @@ const StateProvider = ({ children }) => {
 
 // Exporting the context and provider for use in other parts of the application
 export { StateContext, StateProvider };
+
