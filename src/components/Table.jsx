@@ -32,7 +32,7 @@ export default function Table() {
 
       <div>
         <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
-          {INR_CURRENCY.format(total.toLocaleString())}
+          {INR_CURRENCY.format(total)}
         </h2>
       </div>
     </>
