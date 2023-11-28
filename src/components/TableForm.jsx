@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { INR_CURRENCY } from "../utils/Constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
@@ -118,7 +119,7 @@ export default function TableForm() {
 
       <div>
         <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
-          ₹ {total.toLocaleString()}
+          {INR_CURRENCY.format(total.toLocaleString())}
         </h2>
       </div>
     </>
