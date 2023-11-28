@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { StateContext } from "../context/stateContext";
+import { INR_CURRENCY } from "../utils/Constants";
 
 export default function Table() {
   const { list, total } = useContext(StateContext);
@@ -31,7 +32,7 @@ export default function Table() {
 
       <div>
         <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
-          ₹ {total.toLocaleString()}
+          {INR_CURRENCY.format(total.toLocaleString())}
         </h2>
       </div>
     </>
