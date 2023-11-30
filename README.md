@@ -1,6 +1,6 @@
-# React-Invoice
+# Reinvoice
 
-React Invoice is a hassle-free web tool for creating and customizing invoices. It offers the ability to manage invoice details, item lists, and easily print or download invoices as PDFs, making the invoicing process straightforward and efficient.
+Reinvoice is a hassle-free web tool for creating and customizing invoices. It offers the ability to manage invoice details, item lists, and easily print or download invoices as PDFs, making the invoicing process straightforward and efficient.
 
 ## Table of Contents
 - [Screenshot](#screenshot)
@@ -51,11 +51,11 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
 ```
- git clone https://github.com/AvikNayak22/React-Invoice.git`
+ git clone https://github.com/AvikNayak22/Reinvoice.git`
 ```
 2. Navigate to the project directory:
 ```
-cd React-Invoice
+cd Reinvoice
 ```
 3. Install the required dependencies:
 ```
