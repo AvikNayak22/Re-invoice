@@ -14,8 +14,9 @@ Re-invoice is a hassle-free web tool for creating and customizing invoices. It o
 
 ## Screenshot
 
+![mediamodifier_image (2)](https://github.com/AvikNayak22/Reinvoice/assets/110925067/b6ee2d13-337c-45df-bf88-a9712d7d2395)
 
-![Screenshot 2023-10-25 123624](https://github.com/AvikNayak22/React-Invoice/assets/110925067/d26ff841-0aa2-436c-8fd6-aac187152b2e)
+
 
 ## Demo
 
